@@ -1,0 +1,20 @@
+<aura:component controller="MiniPageLayoutCtrl" implements="flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName,flexipage:availableForAllPageTypes">
+  <aura:attribute name="fieldSetName" type="String" description="The api name of the field set to use from the given object."
+  />
+  <aura:attribute name="recordTypeId" type="String" />
+  <aura:attribute name="fields" type="List" access="private" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  <aura:handler event="force:refreshView" action="{!c.doInit}" />
+
+  <lightning:recordEditForm aura:id="MiniPageLayout" objectApiName="{! v.sObjectName }" recordId="{! v.recordId }">
+    <lightning:messages />
+
+    <aura:iteration items="{! v.fields }" var="field">
+      <lightning:inputField fieldName="{! field.APIName }" class="slds-p-top_small slds-m-top_medium" />
+    </aura:iteration>
+    <lightning:button class="slds-m-top_small" type="submit" label="Save" />
+
+  </lightning:recordEditForm>
+
+</aura:component>
